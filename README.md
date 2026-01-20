@@ -13,7 +13,7 @@
 ![AWS Architecture Diagram](diagram.png)
 
 ## 🛠️ Τεχνολογίες που χρησιμοποιήθηκαν
-* **Γλώσσα & Compute:** Python 3.9 σε AWS Lambda (Serverless Function)
+* **Γλώσσα & Compute:** Python 3.12+ σε AWS Lambda (Serverless Function)
 * **Αποθήκευση:** Amazon S3 (Για τις εικόνες)
 * **Βάση Δεδομένων:** Amazon DynamoDB (NoSQL)
 * **AI/ML:** Amazon Textract (OCR - Αναγνώριση Κειμένου από εικόνα)
