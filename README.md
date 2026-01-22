@@ -1,31 +1,31 @@
 # 🧾 Serverless Receipt Scanner & Analyzer
 
-Ένα cloud-native σύστημα που αυτοματοποιεί την επεξεργασία αποδείξεων χρησιμοποιώντας **AWS Serverless** αρχιτεκτονική και Τεχνητή Νοημοσύνη (**AI/OCR**).
+A cloud-native system designed to automate receipt processing and expense tracking using **AWS Serverless** architecture and **AI-powered OCR**.
 
-## 🚀 Τι κάνει το Project
-Λύνει το πρόβλημα της χειροκίνητης καταχώρησης εξόδων. Ο χρήστης απλά ανεβάζει μια φωτογραφία απόδειξης και το σύστημα αυτόματα:
-1.  Σαρώνει όλο το κείμενο της απόδειξης χρησιμοποιώντας το **Amazon Textract**.
-2.  Μέσω ειδικού αλγορίθμου στη Lambda, εντοπίζει και εξάγει το **συνολικό ποσό πληρωμής**.
-3.  Αποθηκεύει τα στοιχεία της συναλλαγής σε μια βάση **DynamoDB**.
-4.  Στέλνει άμεση ειδοποίηση (Email) στον χρήστη μέσω **Amazon SNS**.
+## 🚀 Project Overview
+This project solves the problem of manual expense entry. By simply uploading a photo of a receipt, the system automatically:
+1.  **Scans** the entire document using **Amazon Textract** (AI/ML).
+2.  **Identifies** and extracts the **Total Amount** via custom logic within an AWS Lambda function.
+3.  **Stores** the transaction details (Date, ID, Amount) in a **DynamoDB** NoSQL database.
+4.  **Notifies** the user instantly via **Email** through **Amazon SNS**.
 
-## 🏗️ Αρχιτεκτονική
+## 🏗️ Architecture
 ![AWS Architecture Diagram](diagram.png)
 
-## 🛠️ Τεχνολογίες που χρησιμοποιήθηκαν
-* **Γλώσσα & Compute:** Python 3.12+ σε AWS Lambda (Serverless Function)
-* **Αποθήκευση:** Amazon S3 (Για τις εικόνες)
-* **Βάση Δεδομένων:** Amazon DynamoDB (NoSQL)
-* **AI/ML:** Amazon Textract (OCR - Αναγνώριση Κειμένου από εικόνα)
-* **Ειδοποιήσεις:** Amazon SNS (Simple Notification Service)
+## 🛠️ Tech Stack
+* **Compute:** Python 3.12+ on **AWS Lambda** (Serverless)
+* **Storage:** **Amazon S3** (Image hosting)
+* **Database:** **Amazon DynamoDB** (NoSQL Persistence)
+* **AI/ML:** **Amazon Textract** (Optical Character Recognition - OCR)
+* **Messaging:** **Amazon SNS** (Simple Notification Service)
 
-## ⚙️ Πώς λειτουργεί (Η ροή δεδομένων)
-1.  **Upload:** Ο χρήστης ανεβάζει μια εικόνα (`.jpg` ή `.png`) στο S3 bucket.
-2.  **Trigger (Event-Driven):** Το S3 δημιουργεί ένα "event" που ενεργοποιεί αυτόματα τη συνάρτηση Lambda.
-3.  **AI Analysis:** Η Lambda στέλνει την εικόνα στο Amazon Textract.
-4.  **Extraction Logic:** Το Textract επιστρέφει όλο το ακατέργαστο κείμενο (JSON). Ο κώδικας της Lambda αναλύει το κείμενο και βρίσκει την τιμή του συνόλου.
-5.  **Persistence:** Η Lambda αποθηκεύει το ID της απόδειξης, την ημερομηνία και το ποσό στη DynamoDB.
-6.  **Notification:** Τέλος, δημοσιεύει ένα μήνυμα στο SNS, το οποίο στέλνει email στον τελικό χρήστη.
+## ⚙️ How it Works (Data Flow)
+1.  **Upload:** The user uploads an image (`.jpg` or `.png`) to a specific S3 bucket.
+2.  **Trigger (Event-Driven):** S3 generates an event that automatically triggers the Lambda function.
+3.  **AI Analysis:** The Lambda function sends the image to Amazon Textract for analysis.
+4.  **Extraction Logic:** Textract returns the raw text (JSON). The Python code parses this data to locate and extract the specific "Total" payment value.
+5.  **Persistence:** The extracted data is saved as a new item in the DynamoDB table.
+6.  **Notification:** Finally, a message is published to an SNS Topic, which sends an automated email notification to the user.
 
 ---
-*Δημιουργήθηκε στα πλαίσια Cloud Engineering Project.*
+*Developed as a Cloud Engineering hands-on project to demonstrate expertise in Event-Driven architectures.*
