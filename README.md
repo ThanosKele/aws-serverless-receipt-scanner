@@ -8,7 +8,7 @@ A production-ready, event-driven serverless application that automates receipt d
 ![Architecture Diagram](./architecture-diagram/diagram.png)
 
 ### 🔄 The Workflow:
-1. **Upload:** A receipt (image/PDF) is uploaded to an **S3 Bucket**.
+1. **Upload:** A receipt image (PNG/JPG) is uploaded to an **S3 Bucket**.
 2. **Trigger:** The upload event triggers an **AWS Lambda** function.
 3. **AI Processing:** Lambda calls **Amazon Textract (AnalyzeExpense)** to extract vendor name and total amount.
 4. **Data Storage:** The extracted data is stored in a **DynamoDB Table**.
