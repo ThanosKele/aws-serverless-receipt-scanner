@@ -1,31 +1,58 @@
-# 🧾 Serverless Receipt Scanner & Analyzer
+# 🧾 AI Serverless Receipt Scanner (AWS)
 
-A cloud-native system designed to automate receipt processing and expense tracking using **AWS Serverless** architecture and **AI-powered OCR**.
-
-## 🚀 Project Overview
-This project solves the problem of manual expense entry. By simply uploading a photo of a receipt, the system automatically:
-1.  **Scans** the entire document using **Amazon Textract** (AI/ML).
-2.  **Identifies** and extracts the **Total Amount** via custom logic within an AWS Lambda function.
-3.  **Stores** the transaction details (Date, ID, Amount) in a **DynamoDB** NoSQL database.
-4.  **Notifies** the user instantly via **Email** through **Amazon SNS**.
-
-## 🏗️ Architecture
-![AWS Architecture Diagram](diagram.png)
-
-## 🛠️ Tech Stack
-* **Compute:** Python 3.12+ on **AWS Lambda** (Serverless)
-* **Storage:** **Amazon S3** (Image hosting)
-* **Database:** **Amazon DynamoDB** (NoSQL Persistence)
-* **AI/ML:** **Amazon Textract** (Optical Character Recognition - OCR)
-* **Messaging:** **Amazon SNS** (Simple Notification Service)
-
-## ⚙️ How it Works (Data Flow)
-1.  **Upload:** The user uploads an image (`.jpg` or `.png`) to a specific S3 bucket.
-2.  **Trigger (Event-Driven):** S3 generates an event that automatically triggers the Lambda function.
-3.  **AI Analysis:** The Lambda function sends the image to Amazon Textract for analysis.
-4.  **Extraction Logic:** Textract returns the raw text (JSON). The Python code parses this data to locate and extract the specific "Total" payment value.
-5.  **Persistence:** The extracted data is saved as a new item in the DynamoDB table.
-6.  **Notification:** Finally, a message is published to an SNS Topic, which sends an automated email notification to the user.
+A production-ready, event-driven serverless application that automates receipt data extraction using Artificial Intelligence. This project leverages **Amazon Textract** to process receipts uploaded to **Amazon S3**, stores the metadata in **Amazon DynamoDB**, and sends real-time notifications via **Amazon SNS**.
 
 ---
-*Developed as a Cloud Engineering hands-on project to demonstrate expertise in Event-Driven architectures.*
+
+## 🏗️ Architecture Diagram
+![Architecture Diagram](./architecture-diagram/architecture.png)
+
+### 🔄 The Workflow:
+1. **Upload:** A receipt (image/PDF) is uploaded to an **S3 Bucket**.
+2. **Trigger:** The upload event triggers an **AWS Lambda** function.
+3. **AI Processing:** Lambda calls **Amazon Textract (AnalyzeExpense)** to extract vendor name and total amount.
+4. **Data Storage:** The extracted data is stored in a **DynamoDB Table**.
+5. **Notification:** An email notification is sent via **Amazon SNS** with the processing results.
+
+---
+
+## 🚀 Key Features
+- **Event-Driven:** Fully automated process triggered by S3 uploads.
+- **AI-Powered OCR:** Uses specialized expense analysis to handle complex receipt layouts.
+- **Multi-language Support:** Successfully tested with both **English** and **Greek** receipts.
+- **Smart Parsing:** Advanced logic to filter out empty "Total" fields and handle various currency formats.
+- **Cost-Efficient:** Built entirely on a Serverless stack (Pay-as-you-go).
+
+---
+
+## 🛠️ Tech Stack
+- **Compute:** AWS Lambda (Python 3.x)
+- **AI/ML:** Amazon Textract
+- **Storage:** Amazon S3, Amazon DynamoDB
+- **Messaging:** Amazon SNS
+- **SDK:** Boto3
+
+---
+
+## 📂 Project Structure
+- `lambda-code/`: The Python source code for the processing engine.
+- `iam-policies/`: JSON templates for the IAM roles and permissions.
+- `architecture-diagram/`: Visual representation of the cloud infrastructure.
+- `sample-receipts/`: Example receipts used for testing (blurred for privacy).
+
+---
+
+## 🔧 Deployment Steps
+1. Create an **S3 Bucket** for receipt uploads.
+2. Create a **DynamoDB Table** (Partition Key: `receipt_id`).
+3. Create an **SNS Topic** and subscribe your email.
+4. Deploy the **Lambda Function** with the provided code.
+5. Attach the **IAM Policies** to the Lambda role (S3, Textract, DynamoDB, SNS access).
+6. Set Environment Variables in Lambda: `TABLE_NAME` and `SNS_TOPIC_ARN`.
+
+---
+
+## 📈 Future Improvements
+- [ ] Integration with a frontend dashboard to visualize expenses.
+- [ ] Support for multi-page PDF document analysis.
+- [ ] Adding AWS Step Functions for more complex error handling.
