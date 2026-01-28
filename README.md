@@ -56,3 +56,9 @@ A production-ready, event-driven serverless application that automates receipt d
 - [ ] Integration with a frontend dashboard to visualize expenses.
 - [ ] Support for multi-page PDF document analysis.
 - [ ] Adding AWS Step Functions for more complex error handling.
+
+---
+
+## 👨‍💻 About the Author
+This project is part of my Serverless Cloud Portfolio, where I document my journey into AWS Cloud Architecture. 
+👉 Explore the Live Portfolio here: (https://d1fx4silgg9iud.cloudfront.net/)
