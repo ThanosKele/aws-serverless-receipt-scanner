@@ -60,5 +60,7 @@ A production-ready, event-driven serverless application that automates receipt d
 ---
 
 ## 👨‍💻 About the Author
-This project is part of my Serverless Cloud Portfolio, where I document my journey into AWS Cloud Architecture. 
-👉 Explore the Live Portfolio here: (https://d1fx4silgg9iud.cloudfront.net/)
+
+This project is a core component of my **Serverless Cloud Portfolio**, where I document my journey into AWS Cloud Architecture and Engineering.
+
+🚀 **Explore the Live Portfolio:** [**Visit My Serverless HQ**](https://d1fx4silgg9iud.cloudfront.net/)
