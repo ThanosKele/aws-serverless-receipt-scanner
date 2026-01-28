@@ -5,7 +5,7 @@ A production-ready, event-driven serverless application that automates receipt d
 ---
 
 ## 🏗️ Architecture Diagram
-![Architecture Diagram](./architecture-diagram/diagram.png)
+![Architecture Diagram](./architecture-diagram/diagram_receiptScanner.png)
 
 ### 🔄 The Workflow:
 1. **Upload:** A receipt image (PNG/JPG) is uploaded to an **S3 Bucket**.
